@@ -4,9 +4,6 @@ import matplotlib
 import matplotlib.pyplot as pyplot
 from Network import Network
 
-# np.random.seed(0)
-
-
 testImage = (0, 0)
 
 # parse the train images from the mnist database
@@ -23,7 +20,7 @@ testImages = np.array(mnist.test_images())
 testImages = (testImages - np.min(testImages)) / (
     np.max(testImages) - np.min(testImages)
 )
-# reshape the array to have 600 mini sets of 100 images
+# reshape the array to have an array of 10000 images
 testImages = np.reshape(testImages, (10000, 784))
 
 
@@ -55,17 +52,18 @@ for epoch in range(4):
         iteration += 1
 
         # first iteration of the training
-        # done outside the loop because this way, weightGradientStack and biasGradientStack
-        # isn't reasigned for each iteration, I don't know how to do this in another way
+        # done outside the main loop because this way, weightGradientStack and
+        # biasGradientStack isn't reasigned for each iteration, I don't know how to do
+        # this in another way
         network.feedForward(trainImages[0][0])
         print(f"{iteration} --> {network.cost((0, 0))}")
         print(network.layers[2].activations)
 
-        # I create a gradientStack variable to hold the gradient values for the weights and
-        # biases
-        # this is done by assigning the variable to weightGradient - weightGradientStack to
-        # get an array with the same shape, where each value is 0, and doesn't affect the
-        # result
+        # I create a gradientStack variable to hold the gradient values for the weights
+        # and biases
+        # this is done by assigning the variable to weightGradient - weightGradientStack
+        # to get an array with the same shape, where each value is 0, and doesn't affect
+        # the result
         weightGradient, biasGradient = network.calculateGradient((0, 0))
 
         weightGradientStack = weightGradient - weightGradient
@@ -101,17 +99,19 @@ np.savetxt("data/biases/biases2.csv", network.layers[2].biases, delimiter=",")
 
 # test the network, with the test data, that has not been seen by the network before
 while True:
-    
-    imageChosen = int(input("choose a test image (0-59999)"))
-    
+    imageChosen = int(input("choose a test image (0-9999)"))
+
     # feed forward to get activations
     network.feedForward(testImages[imageChosen])
     print(network.layers[2].activations)
+    activations = list(network.layers[2].activations)
     
     # represent images in matplotlib:
     # reshape the image to a (28, 28) dimension array
     image = np.reshape(testImages[imageChosen], (28, 28))
     # show the image in matplotlib
-    pyplot.title(f"survey says: {testLabels[imageChosen]}")
+    pyplot.title(
+        f"label says: {testLabels[imageChosen]} \n network says: {activations.index(max(activations))}"
+    )
     pyplot.imshow(image, interpolation="nearest", cmap="gray")
     pyplot.show()

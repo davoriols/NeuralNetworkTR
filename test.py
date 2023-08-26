@@ -84,14 +84,6 @@ else:
         "data/biases/biases2.csv", delimiter=",", dtype=None
     )
 
-network.feedForward(testImages[600])
-print(network.layers[2].activations)
-print(testLabels[600])
-
-labels = list(network.layers[2].activations)
-
-print(labels.index(max(labels)))
-
 
 totalGuesses = 0
 correctGuesses = 0
@@ -112,7 +104,7 @@ for imageIndex, image in enumerate(testImages):
             image = np.reshape(image, (28, 28))
             # show the image in matplotlib
             pyplot.title(
-                f"survey says: {testLabels[imageIndex]} \n network says: {activations.index(max(activations))}"
+                f"label says: {testLabels[imageIndex]} \n network says: {activations.index(max(activations))}"
            )
             # pyplot.title(f"network says: {activations.index(max(activations))}")
             pyplot.imshow(image, interpolation="nearest", cmap="gray")
@@ -121,3 +113,22 @@ for imageIndex, image in enumerate(testImages):
     print(f"correct guesses: {correctGuesses}")
     print(f"total guessses:  {totalGuesses}")
     print(f"accuracy:        {correctGuesses / totalGuesses * 100}")
+
+
+# test the network, with the test data, that has not been seen by the network before
+while True:
+    
+    imageChosen = int(input("choose a test image (0-9999)"))
+    
+    # feed forward to get activations
+    network.feedForward(testImages[imageChosen])
+    print(network.layers[2].activations)
+    activations = list(network.layers[2].activations)
+    
+    # represent images in matplotlib:
+    # reshape the image to a (28, 28) dimension array
+    image = np.reshape(testImages[imageChosen], (28, 28))
+    # show the image in matplotlib
+    pyplot.title(f"label says: {testLabels[imageChosen]} \n network says: {activations.index(max(activations))}")
+    pyplot.imshow(image, interpolation="nearest", cmap="gray")
+    pyplot.show()

@@ -4,7 +4,6 @@ import numpy as np
 class Layer:
     # generates the weights and biases of the layer
     def __init__(self, inputSize=784, outputSize=16):
-        # np.random.seed(0)
         self.weights = np.random.uniform(-0.5, 0.5, (outputSize, inputSize))
         self.biases = np.random.uniform(-0.5, 0.5,(outputSize))
         self.outputSize = outputSize

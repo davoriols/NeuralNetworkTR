@@ -88,23 +88,8 @@ class Network:
         # gradient value of the weight
         weightGradient = [[], [], []]
 
-        weightGradient[1] = np.zeros(
-            (self.layers[1].outputSize, self.layers[1].inputSize), dtype=object
-        )
-
-        weightGradient[2] = np.zeros(
-            (self.layers[2].outputSize, self.layers[2].inputSize), dtype=object
-        )
-
         biasGradient = [[], [], []]
 
-        biasGradient[0] = np.zeros((self.layers[0].outputSize), dtype=object)
-
-        biasGradient[1] = np.zeros((self.layers[1].outputSize), dtype=object)
-
-        biasGradient[2] = np.zeros((self.layers[2].outputSize), dtype=object)
-
-        # calculate deltas with calculateDeltas function:
         deltas = self.calculateDeltas(image)
 
         # calculate the amount we have to change the weights:
@@ -123,6 +108,8 @@ class Network:
                 deltasShaped = np.array(deltas[0]).reshape(
                     np.array(deltas[0]).shape[0], -1
                 )
+
+                # we do the dot product to calculate the gradient
                 weightGradient[0] = self.learningRate * np.dot(
                     deltasShaped, imageShaped
                 )
@@ -148,7 +135,6 @@ class Network:
 
             biasGradient[layerIndex] = self.learningRate * np.array(deltas[layerIndex])
 
-
         return np.array(weightGradient, dtype=object), np.array(
             biasGradient, dtype=object
         )
@@ -157,7 +143,8 @@ class Network:
     # this gradient is en theory a average of all the gradients of the mini set
     def backpropagation(self, weightGradient, biasGradient):
         # loop through the weights and subtract a multiple of the gradient value for
-        # each weight
+        # each weights
+        # this can probably be done without loops, but this works
         for layerIndex, layer in enumerate(self.layers):
             for rowIndex, row in enumerate(layer.weights):
                 for weightIndex, weight in enumerate(row):

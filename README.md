@@ -2,10 +2,10 @@
 Red Neuronal para mi Trabajo de investigación
 
 ## Índice: 
-1. [Dependencias](#Dependencias)
-2. [Uso de la red neuronal](#uso)
-    1. [Entrenar red neuronal](#entrenar)
-    2. [Comprobar red neuronal](#comprobar)
+1. Dependencias
+2. Uso de la red neuronal
+    1. Entrenar red neuronal
+    2. Comprobar red neuronal
 
 
 ## Dependencias
@@ -17,9 +17,9 @@ Para usar la red neuronal hacen falta 3 dependencias:
 
 Todas ellas se pueden instalar con `pip`.
 
-## Uso de la red neuronal {#uso}
+## Uso de la red neuronal
 
-### Entrenar red neuronal {#entrenar}
+### Entrenar red neuronal
 
 Ejecutando el archivo `main.py`, empezará a entrenar la red neuronal. Por cada iteración, se imprime a la consola la iteración en la que está, el coste y las activaciones de esa iteración:
 
@@ -42,7 +42,7 @@ Vemos que se nos muestra la etiqueta de la imagen, es decir, el número de la im
 
 ---
 
-### Comprobar la red neuronal {#comprobar}
+### Comprobar la red neuronal
 
 Podemos comprobar la precisión de nuestra red neuronal ejecutando el archivo `test.py`. Pero antes de ello, podemos configurarlo: 
 
@@ -56,5 +56,6 @@ Podemos cambiar `showResults` para ver en qué imágenes se ha equivocado la red
 Si asignamos `showResults` a `False`, estas imágenes no se mostrarán y se seguirá con el programa, que una vez acabado, muestra el porcentaje de aciertos de la red neuronal 
 y te vuelve a pedir un número entre 0-9999 para ver alguna imagen en específico.
 
-![Screenshot_20230826_141014](https://github.com/davoriols/NeuralNetworkTR/assets/35429501/6918773b-663a-4a82-88b9-41dc3d14c68d)
+![Screenshot_20230826_141552](https://github.com/davoriols/NeuralNetworkTR/assets/35429501/60e6bee4-ed97-423e-8198-24c0eefd379f)
+
 

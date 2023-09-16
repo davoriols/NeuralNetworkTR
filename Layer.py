@@ -28,13 +28,3 @@ class Layer:
             self.costValue += np.power(activation - labelList[0], 2)
 
         return self.costValue
-
-    # for now, a function that calculates the deltas of the last layer
-    # used to calculate the deltas of all the layers in the network class
-    def calculateLayerDeltas(self, labelList):
-        deltas = []
-        for activation in self.activations:
-            deltas.append(activation * (1 - activation) *
-                          2 * (activation - labelList[3]))
-
-        return deltas

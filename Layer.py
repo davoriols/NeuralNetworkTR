@@ -18,13 +18,3 @@ class Layer:
             np.dot(self.weights, input) + self.biases)
 
         return self.activations
-
-    # Cost function. only used to show how the network learns, but isn't really necessary for the learning
-    def layerCost(self, labelList):
-        self.costValue = 0
-
-        # Calculate the cost by looping through each activation
-        for activation in self.activations:
-            self.costValue += np.power(activation - labelList[0], 2)
-
-        return self.costValue

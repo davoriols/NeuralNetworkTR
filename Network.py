@@ -3,7 +3,7 @@ from Layer import Layer
 
 
 class Network:
-    def __init__(self, trainInput, trainLabels, learningRate=-0.01):
+    def __init__(self, trainInput, trainLabels, learningRate=0.01):
         # network with four layers of which the first layer is just the input
         # therefore we don't declare it since it doesn't have weights or biases
         self.layers = [Layer(784, 20), Layer(20, 20), Layer(20, 10)]
@@ -140,21 +140,21 @@ class Network:
         )
 
     # function to modify the weights and biases by a multiple of the gradient
-    # this gradient is en theory a average of all the gradients of the mini set
+    # this gradient is in theory a average of all the gradients of the mini set
     def backpropagation(self, weightGradient, biasGradient):
         # loop through the weights and subtract a multiple of the gradient value for
-        # each weights
+        # each weight
         # this can probably be done without loops, but this works
         for layerIndex, layer in enumerate(self.layers):
             for rowIndex, row in enumerate(layer.weights):
                 for weightIndex, weight in enumerate(row):
                     self.layers[layerIndex].weights[rowIndex][
                         weightIndex
-                    ] += weightGradient[layerIndex][rowIndex][weightIndex]
+                    ] -= weightGradient[layerIndex][rowIndex][weightIndex]
 
             # loop through the weights and subtract a multiple of the gradient value for
             # each bias
             for biasIndex, bias in enumerate(layer.biases):
-                self.layers[layerIndex].biases[biasIndex] += biasGradient[layerIndex][
+                self.layers[layerIndex].biases[biasIndex] -= biasGradient[layerIndex][
                     biasIndex
                 ]

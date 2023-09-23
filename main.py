@@ -5,19 +5,17 @@ import matplotlib.pyplot as pyplot
 from Network import Network
 
 # parse the train images from the mnist database
-images = np.array(mnist.train_images())
+trainImages = np.array(mnist.train_images())
 # normalize the pixel values to pass them as activations
-images = (images - np.min(images)) / (np.max(images) - np.min(images))
+trainImages = (trainImages) / 255 
 # reshape the array to have 600 mini sets of 100 images
-trainImages = np.reshape(images, (600, 100, 784))
+trainImages = np.reshape(trainImages, (600, 100, 784))
 
 
 # parse the test images from the mnist database
 testImages = np.array(mnist.test_images())
 # normalize the pixel values to pass them as activations
-testImages = (testImages - np.min(testImages)) / (
-    np.max(testImages) - np.min(testImages)
-)
+testImages = (testImages) / 255 
 # reshape the array to have an array of 10000 images
 testImages = np.reshape(testImages, (10000, 784))
 

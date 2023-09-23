@@ -4,8 +4,6 @@ import matplotlib
 import matplotlib.pyplot as pyplot
 from Network import Network
 
-testImage = (0, 0)
-
 # parse the train images from the mnist database
 images = np.array(mnist.train_images())
 # normalize the pixel values to pass them as activations

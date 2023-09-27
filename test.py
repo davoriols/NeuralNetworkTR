@@ -4,12 +4,12 @@ import mnist
 from Network import Network
 import matplotlib.pyplot as pyplot
 
-# Configurationt options: 
+# Configuration options: 
 
-# change to True to used saved training data, or False to data from previous training
+# change to True to use saved training data, or False to use data from previous training
 useTrainData = False
 
-# change to True to show a pyplot of the incorrect gueses, of False to not show
+# change to True to show a pyplot of the incorrect guesses, or False to not show
 showResults = False
 
 # parse the test images from the mnist database
@@ -31,7 +31,7 @@ network = Network(None, None)
 
 # checks if what training data we want to use
 if useTrainData:
-    # get the pretrained weights and biases
+    # get the pretrained weights
     network.layers[0].weights = genfromtxt(
         "trainedData/weights/weights0.csv", delimiter=",", dtype=None
     )
@@ -44,7 +44,7 @@ if useTrainData:
         "trainedData/weights/weights2.csv", delimiter=",", dtype=None
     )
 
-    # do the same for weights
+    # do the same for biases
     network.layers[0].biases = genfromtxt(
         "trainedData/biases/biases0.csv", delimiter=",", dtype=None
     )
@@ -58,7 +58,7 @@ if useTrainData:
     )
 
 else:
-    # get the pretrained weights and biases
+    # get the user-trained weights
     network.layers[0].weights = genfromtxt(
         "data/weights/weights0.csv", delimiter=",", dtype=None
     )
@@ -71,7 +71,7 @@ else:
         "data/weights/weights2.csv", delimiter=",", dtype=None
     )
 
-    # do the same for weights
+    # do the same for biases
     network.layers[0].biases = genfromtxt(
         "data/biases/biases0.csv", delimiter=",", dtype=None
     )
@@ -106,7 +106,6 @@ for imageIndex, image in enumerate(testImages):
             pyplot.title(
                 f"label says: {testLabels[imageIndex]} \n network says: {activations.index(max(activations))}"
            )
-            # pyplot.title(f"network says: {activations.index(max(activations))}")
             pyplot.imshow(image, interpolation="nearest", cmap="gray")
             pyplot.show()
 

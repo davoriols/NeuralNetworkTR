@@ -18,18 +18,18 @@ testImages = np.array(mnist.test_images())
 testImages = (testImages - np.min(testImages)) / (
     np.max(testImages) - np.min(testImages)
 )
-# reshape the array to have 600 mini sets of 100 images
+# reshape the array to have a list of 10000 images
 testImages = np.reshape(testImages, (10000, 784))
 
 # import test labels
 testLabels = mnist.test_labels()
 
 # generate network object
-# for the methods we use to test, we don't accually need the trainData, but the network
+# for the methods we use to test, we don't accually need trainImages or trainLabels, but the network
 # requires it, so we just pass None
 network = Network(None, None)
 
-# checks if what training data we want to use
+# checks which weights and biases values we want to use
 if useTrainData:
     # get the pretrained weights
     network.layers[0].weights = genfromtxt(
@@ -125,7 +125,7 @@ while True:
     activations = list(network.layers[2].activations)
     
     # represent images in matplotlib:
-    # reshape the image to a (28, 28) dimension array
+    # reshape the image to a (28, 28) shape array
     image = np.reshape(testImages[imageChosen], (28, 28))
     # show the image in matplotlib
     pyplot.title(f"label says: {testLabels[imageChosen]} \n network says: {activations.index(max(activations))}")

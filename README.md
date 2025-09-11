@@ -1,5 +1,5 @@
 # NeuralNetworkTR
-Red Neuronal para mi Trabajo de investigación
+Red Neuronal para mi Trabajo de investigación. El trabajo que acompaña este código se puede encontrar en ¿Qué hay detrás de una red neuronal?.pdf 
 
 ## Índice: 
 1. Dependencias
